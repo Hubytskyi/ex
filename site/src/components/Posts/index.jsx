@@ -9,9 +9,11 @@ const PostsList = ({nodes}) => {
 
     const defaultZip = '10001';
     const defaultCity = 'New York';
+    const defaultState = 'NY';
 
     const [filters, setFilters] = useState({
-        cities: defaultCity
+        city: defaultCity,
+        state: defaultState,
     });
 
     const [zipValue, setZipValue] = useState(defaultZip);
@@ -26,8 +28,9 @@ const PostsList = ({nodes}) => {
     const filteredPosts = useMemo(() => {
         return nodes.filter((node) => {
             const itemCities = node.cities?.split(',').map(element => element.trim()) || [];
+            const itemStates = node.states?.split(',').map(element => element.trim()) || [];
             const itemFilters = node.filters.split(',').map(element => element.trim());
-            const items = [...itemCities, ...itemFilters];
+            const items = [...itemCities, ...itemStates, ...itemFilters];
             if (Object.values(filters).every(el => items.indexOf(el) !== -1)) {
                 return node;
             }
@@ -35,7 +38,7 @@ const PostsList = ({nodes}) => {
     }, [nodes, filters, zipValue]);
 
     const refreshFilter = () => {
-        setFilters({cities: defaultCity});
+        setFilters({city: defaultCity, state: defaultState});
         setZipValue(defaultZip);
         localStorage.removeItem('zip');
     };

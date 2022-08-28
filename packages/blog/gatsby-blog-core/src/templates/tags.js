@@ -16,6 +16,7 @@ export const pageQuery = graphql`
                 icon
                 filters
                 cities
+                states
             }
             pageInfo {
                 pageCount

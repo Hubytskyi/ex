@@ -34,7 +34,8 @@ const Locations = ({handleChange, zipValue, setZipValue, defaultZip}) => {
         return;
       }
 
-      handleChange(filteredZip[0].city, 'cities');
+      handleChange(filteredZip[0].city, 'city');
+      handleChange(filteredZip[0].state, 'state');
       setCity(filteredZip[0].city);
       setState(filteredZip[0].state);
       setCountry(filteredZip[0].county);
@@ -51,37 +52,37 @@ const Locations = ({handleChange, zipValue, setZipValue, defaultZip}) => {
   }, [zipValue])
 
   return (
-    <Box sx={{pr: 2}}>
-      <Box sx={{mb: 1}}>
-        <Typography>Locations</Typography>
-      </Box>
-      <Box sx={{mb: 2}}>
-        <TextField id="zip" name="zip" label="Zip" variant="outlined" value={zipValue}
-                   onChange={(event) => zipHandler(event.target.value)}
-                   helperText={zipError}
-                   fullWidth
-                   error={zipError}
-        />
-        <Box sx={{
-          position: "absolute",
-          right: 20,
-          top: "50%",
-          transform: "translateY(-50%)",
-          display: "flex"
-        }}>
-          {zipLoading && <CircularProgress size={20} />}
+      <Box sx={{pr: 2}}>
+        <Box sx={{mb: 1}}>
+          <Typography>Locations</Typography>
+        </Box>
+        <Box sx={{mb: 2}}>
+          <TextField id="zip" name="zip" label="Zip" variant="outlined" value={zipValue}
+                     onChange={(event) => zipHandler(event.target.value)}
+                     helperText={zipError}
+                     fullWidth
+                     error={zipError}
+          />
+          <Box sx={{
+            position: "absolute",
+            right: 20,
+            top: "50%",
+            transform: "translateY(-50%)",
+            display: "flex"
+          }}>
+            {zipLoading && <CircularProgress size={20} />}
+          </Box>
+        </Box>
+        <Box sx={{mb: 2}}>
+          <TextField id="country" name="country" label="Country" variant="outlined" value={country} disabled fullWidth/>
+        </Box>
+        <Box sx={{mb: 2}}>
+          <TextField id="state" name="state" label="State" variant="outlined" value={state} disabled fullWidth/>
+        </Box>
+        <Box sx={{mb: 2}}>
+          <TextField id="city" name="city" label="City" variant="outlined" value={city} disabled fullWidth/>
         </Box>
       </Box>
-      <Box sx={{mb: 2}}>
-        <TextField id="country" name="country" label="Country" variant="outlined" value={country} disabled fullWidth/>
-      </Box>
-      <Box sx={{mb: 2}}>
-        <TextField id="state" name="state" label="State" variant="outlined" value={state} disabled fullWidth/>
-      </Box>
-      <Box sx={{mb: 2}}>
-        <TextField id="city" name="city" label="City" variant="outlined" value={city} disabled fullWidth/>
-      </Box>
-    </Box>
   );
 };
 
