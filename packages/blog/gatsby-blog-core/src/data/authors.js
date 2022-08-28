@@ -1,0 +1,7 @@
+const authors = [
+    {id: '1', slug: 'jane_smith', name: 'Jane Smith', photo: 'jane-smith.jpg', position: 'Creative Designer', expertise: 'Advertising, Business, Designer', description: 'Sed commodo, est quis maximus fermentum, massa ipsum euismod neque, in varius risus tellus quis lacus. Sed ac bibendum odio.', website: 'https://www.google.com/', twitter: 'https://twitter.com/', instagram: 'https://instagram.com/'},
+    {id: '2', slug: 'john_doe', name: 'John Doe', photo: 'john-doe.jpg', position: 'Web Developer', expertise: 'JavaScript, React, Nodejs', description: 'Sed commodo, est quis maximus fermentum, massa ipsum euismod neque, in varius risus tellus quis lacus. Sed ac bibendum odio.', website: 'https://www.google.com/', twitter: 'https://twitter.com/', instagram: 'https://instagram.com/'},
+    {id: '3', slug: 'comply-me', name: 'Comply Me', photo: 'john-doe.jpg', position: 'Web Developer', expertise: 'JavaScript, React, Nodejs', description: 'Sed commodo, est quis maximus fermentum, massa ipsum euismod neque, in varius risus tellus quis lacus. Sed ac bibendum odio.', website: 'https://www.google.com/', twitter: 'https://twitter.com/', instagram: 'https://instagram.com/'}
+];
+
+module.exports = authors;
