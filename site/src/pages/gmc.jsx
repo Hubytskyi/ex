@@ -1,12 +1,15 @@
 import React from 'react';
-import GMCLayout from '../layouts/gmc';
 import GMCForm from '../components/forms/gmc';
+import {Layout} from "@layout/Layout/Layout";
+import GMCLayout from "../layouts/gmc";
 
-const GMC = () => {
+const GMC = (props) => {
     return (
-        <GMCLayout headerType={'form'}>
-            <GMCForm />
-        </GMCLayout>
+        <Layout {...props}>
+            <GMCLayout>
+                <GMCForm/>
+            </GMCLayout>
+        </Layout>
     );
 };
 
