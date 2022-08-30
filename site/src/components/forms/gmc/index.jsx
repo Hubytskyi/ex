@@ -8,6 +8,9 @@ import {
 } from '@mui/material';
 import {useFormik} from 'formik';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import emailjs from '@emailjs/browser';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import theme from '../../../styles/theme/theme.const';
 import StepOne from './step1';
 import StepTwo from './step2';
@@ -21,7 +24,6 @@ import GMCHelper from './helper';
 import {initialValues, initialValuesCalc} from '../../../constants/gmc-form.const';
 import bgTopRightImg from '../../../assets/images/right-top-bg.svg';
 import bgBottomLeftImg from '../../../assets/images/left-bottom-bg.svg';
-import emailjs from '@emailjs/browser';
 
 const styles = {
     gmc: {
@@ -117,7 +119,7 @@ const GMCForm = () => {
 
     const [data, setData] = useState(initialValues);
     const [dataCalc, setDataCalc] = useState(initialValuesCalc);
-    const [currentStep, setCurrentStep] = useState(0);
+    const [currentStep, setCurrentStep] = useState(2);
     const [isOpen, setIsOpen] = useState(false);
     const [currentCalcStep, setCurrentCalcStep] = useState(0);
 
@@ -162,10 +164,18 @@ const GMCForm = () => {
     };
 
     const makeRequest = (formData) => {
-        emailjs.send('service_dl07wyk', 'template_5cafvh8', formData, 'jglhnofqEgcUjRvy5')
+        emailjs.send('service_dl07wyk', 'template_f5lg4tb', formData, '4jPu-i20ORVH0CeQm')
             .then(() => {
                 setSubmitting(false)
-                window.location.href = redirect();
+                toast.success("Your request has been submitted, our representative will contact you shortly.", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
             })
             .catch((error) => {
                 alert(error);
@@ -294,6 +304,17 @@ const GMCForm = () => {
                 handleNextCalcStep={handleNextCalcStep}
                 currentCalcStep={currentCalcStep}
             />}
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </Box>
     );
 };

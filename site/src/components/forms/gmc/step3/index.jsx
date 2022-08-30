@@ -9,9 +9,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import FormTitle from '../title';
 import employeeOnlyImg from '../../../../assets/images/employeeOnly.svg';
 import employeeSpouseImg from '../../../../assets/images/employeeSpouse.svg';
@@ -381,9 +381,10 @@ const StepThree = ({errors, values, handleChange, setFieldValue, setFieldError})
           )}
         </Box>
         : <Box width={380} maxWidth={'100%'} mb={5}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DesktopDatePicker
               label="Choose Expiry Date"
+                inputFormat="MM/DD/YYYY"
               name={'expiryDate'}
               value={values.expiryDate || ''}
               onChange={(newValue) => {
