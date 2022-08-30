@@ -119,7 +119,7 @@ const GMCForm = () => {
 
     const [data, setData] = useState(initialValues);
     const [dataCalc, setDataCalc] = useState(initialValuesCalc);
-    const [currentStep, setCurrentStep] = useState(2);
+    const [currentStep, setCurrentStep] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const [currentCalcStep, setCurrentCalcStep] = useState(0);
 
@@ -164,7 +164,7 @@ const GMCForm = () => {
     };
 
     const makeRequest = (formData) => {
-        emailjs.send('service_dl07wyk', 'template_f5lg4tb', formData, '4jPu-i20ORVH0CeQm')
+        emailjs.send('service_dl07wyk', 'template_5cafvh8', formData, 'jglhnofqEgcUjRvy5')
             .then(() => {
                 setSubmitting(false)
                 toast.success("Your request has been submitted, our representative will contact you shortly.", {
