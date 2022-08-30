@@ -21,6 +21,7 @@ import GMCHelper from './helper';
 import {initialValues, initialValuesCalc} from '../../../constants/gmc-form.const';
 import bgTopRightImg from '../../../assets/images/right-top-bg.svg';
 import bgBottomLeftImg from '../../../assets/images/left-bottom-bg.svg';
+import emailjs from '@emailjs/browser';
 
 const styles = {
     gmc: {
@@ -119,7 +120,6 @@ const GMCForm = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const [currentCalcStep, setCurrentCalcStep] = useState(0);
-    const formName = 'gmc';
 
     const handleNextCalcStep = (newData) => {
         setDataCalc(prev => ({...prev, ...newData}));
@@ -161,36 +161,20 @@ const GMCForm = () => {
         return sum === totalNumber;
     };
 
-    function encode(data) {
-        return Object.keys(data)
-            .map(
-                (key) =>
-                    encodeURIComponent(key) + '=' + encodeURIComponent(data[key]),
-            )
-            .join('&');
-    }
-
     const makeRequest = (formData) => {
-        fetch('/', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: encode({
-                'form-name': formName,
-                ...formData,
-            }),
-        })
+        emailjs.send('service_dl07wyk', 'template_5cafvh8', formData, 'jglhnofqEgcUjRvy5')
             .then(() => {
+                setSubmitting(false)
                 window.location.href = redirect();
             })
             .catch((error) => {
-                throw error;
+                alert(error);
             })
             .finally(() => setSubmitting(false));
     };
 
     const handleNextStep = (newData, isLastStep = false) => {
         setData(prev => ({...prev, ...newData}));
-
         if (!isNumberOfLivesEqualToSum()) {
             setFieldError('totalNumberOfEmployees', 'No. of employees must be equal to sum of employees');
             setSubmitting(false);
@@ -275,7 +259,6 @@ const GMCForm = () => {
                 <form
                     noValidate
                     onSubmit={handleSubmit}
-                    data-netlify="true"
                     name="gmc"
                     method="post"
                 >
