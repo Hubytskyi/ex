@@ -15,16 +15,22 @@ const PostsList = ({nodes}) => {
     const [filters, setFilters] = useState({
         city: defaultCity,
         state: defaultState,
-        country: defaultCountry,
     });
+
+    const [country, setCountry] = useState(defaultCountry)
 
     const [zipValue, setZipValue] = useState(defaultZip);
 
     const handleChange = (value, category) => {
+        if (category === 'country') {
+            setCountry(value)
+            return;
+        }
         setFilters(prev => ({
             ...prev,
             [category]: value
         }));
+
     };
 
     const parseStringToArray = (list) => {
@@ -37,17 +43,17 @@ const PostsList = ({nodes}) => {
             const itemCities = parseStringToArray(node.cities)
             const itemStates = parseStringToArray(node.states)
             const itemFilters = parseStringToArray(node.filters)
-            const items = [...itemCities, ...itemStates, ...itemFilters, itemCountry];
+            const items = [...itemCities, ...itemStates, ...itemFilters];
             if (Object.values(filters).every(el => items.indexOf(el) !== -1)) {
                 return node;
-            } else if (filters.country === defaultCountry && itemCountry === defaultCountry) {
+            } else if (country === defaultCountry && itemCountry === defaultCountry) {
                 return node
             }
         });
     }, [nodes, filters, zipValue]);
 
     const refreshFilter = () => {
-        setFilters({city: defaultCity, state: defaultState, country: defaultCountry});
+        setFilters({city: defaultCity, state: defaultState});
         setZipValue(defaultZip);
         localStorage.removeItem('zip');
     };
