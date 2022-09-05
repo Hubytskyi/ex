@@ -36,6 +36,7 @@ const PostItem = ({title, icon, slug}) => {
       }}>
         <Image icon={icon} width={'34px'} height={'34px'} />
         <Box sx={{
+          textAlign: 'lfet',
           overflow: 'hidden',
           display: '-webkit-box',
           '-webkit-line-clamp': '3',

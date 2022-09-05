@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, CircularProgress, TextField, Typography } from '@mui/material';
 import zipData from '../../../data/USCities.json';
 
-const Locations = ({handleChange, zipValue, setZipValue, defaultZip}) => {
+const Locations = ({handleChange, zipValue, setZipValue}) => {
 
   const [zipLoading, setZipLoading] = useState(false);
   const [zipError, setZipError] = useState('');
@@ -36,6 +36,7 @@ const Locations = ({handleChange, zipValue, setZipValue, defaultZip}) => {
 
       handleChange(filteredZip[0].city, 'city');
       handleChange(filteredZip[0].state, 'state');
+      handleChange(filteredZip[0].county, 'country');
       setCity(filteredZip[0].city);
       setState(filteredZip[0].state);
       setCountry(filteredZip[0].county);

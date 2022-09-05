@@ -9,11 +9,13 @@ const PostsList = ({nodes}) => {
 
     const defaultZip = '10001';
     const defaultCity = 'New York';
+    const defaultCountry = 'US';
     const defaultState = 'NY';
 
     const [filters, setFilters] = useState({
         city: defaultCity,
         state: defaultState,
+        country: defaultCountry,
     });
 
     const [zipValue, setZipValue] = useState(defaultZip);
@@ -25,20 +27,27 @@ const PostsList = ({nodes}) => {
         }));
     };
 
+    const parseStringToArray = (list) => {
+        return list?.split(',').map(element => element.trim()) || [];
+    }
+
     const filteredPosts = useMemo(() => {
         return nodes.filter((node) => {
-            const itemCities = node.cities?.split(',').map(element => element.trim()) || [];
-            const itemStates = node.states?.split(',').map(element => element.trim()) || [];
-            const itemFilters = node.filters.split(',').map(element => element.trim());
-            const items = [...itemCities, ...itemStates, ...itemFilters];
+            const itemCountry = node.country || '';
+            const itemCities = parseStringToArray(node.cities)
+            const itemStates = parseStringToArray(node.states)
+            const itemFilters = parseStringToArray(node.filters)
+            const items = [...itemCities, ...itemStates, ...itemFilters, itemCountry];
             if (Object.values(filters).every(el => items.indexOf(el) !== -1)) {
                 return node;
+            } else if (filters.country === defaultCountry && itemCountry === defaultCountry) {
+                return node
             }
         });
     }, [nodes, filters, zipValue]);
 
     const refreshFilter = () => {
-        setFilters({city: defaultCity, state: defaultState});
+        setFilters({city: defaultCity, state: defaultState, country: defaultCountry});
         setZipValue(defaultZip);
         localStorage.removeItem('zip');
     };
